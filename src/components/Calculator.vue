@@ -20,28 +20,35 @@
                 dark
                 flat
               >
-                <v-toolbar-title>Bit Calculator</v-toolbar-title>
+                <v-toolbar-title>Bitwise Calculator</v-toolbar-title>
                 <v-spacer />
 
               </v-toolbar>
+
               <v-card-text>
-                <v-form>
-                    <v-text-field
-                        label="X"
+                <v-form
+                    @submit.prevent="calculate"
+                    id="calc-form"
+                >
+
+                    <MultiInput
+                        label="x"
                         placeholder="0x00"
-                        outlined
-                    ></v-text-field>
-                    <v-text-field
+                        :calc="calc.formX"
+                    />
+
+                    <MultiInput
                         label="Y"
                         placeholder="0x00"
-                        outlined
-                    ></v-text-field>
-                    <v-text-field
+                        :calc="calc.formY"
+                    />
+
+                    <MultiInput
                         label="Result"
                         placeholder="0x00"
-                        outlined
-                        disabled
-                    ></v-text-field>
+                        :calc="calc.formR"
+                        :disabled=true
+                    />
 
                     <v-btn small>&lt;&lt;</v-btn>
                     <v-btn small>&gt;&gt;</v-btn>
@@ -53,7 +60,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="primary">Calculate</v-btn>
+                <v-btn color="primary" type="submit" form="calc-form">Calculate</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -64,9 +71,64 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      source: String,
+import MultiInput from './MultiInput';
+
+export default {
+    components: {
+        MultiInput
     },
-  }
+    props: {},
+    data() {
+        return {
+            calc : {
+                formX: '',
+                formY: '',
+                formR: ''
+            }
+        }
+    },
+    methods: {
+
+        calculate(e) {
+            console.log(e,'calc');
+        },
+
+        toDec(num){
+            console.log('toDec', num);
+        },
+        isDec(num){
+            console.log('isDec', num);
+            return false;
+        },
+
+        toHex(num){
+            console.log('toHex', num);
+        },
+        isHex(num){
+            console.log('isHex', num);
+            let a = parseInt(num,16);
+            return (a.toString(16) === num.toLowerCase())
+        },
+
+        toBin(num){
+            console.log('toBin', num);
+        },
+        isBin(num){
+            console.log('isBin', num);
+            let re = new RegExp('^[0-1]{1,}$');
+            return re.test(num);
+        },
+
+        detectType(e){
+            console.log('detectType', num);
+            let num = e.target.value;
+
+            let isDec = this.isDec(num);
+            let isHex = this.isHex(num);
+            let isBin = this.isBin(num);
+
+            console.log('isDec', isDec, 'isHex', isHex, 'isBin',isBin);
+        }
+    }
+}
 </script>
