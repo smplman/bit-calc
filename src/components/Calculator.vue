@@ -34,19 +34,19 @@
                     <MultiInput
                         label="x"
                         placeholder="0x00"
-                        :calc="calc.formX"
+                        :val.sync="calc.formX"
                     />
 
                     <MultiInput
                         label="Y"
                         placeholder="0x00"
-                        :calc="calc.formY"
+                        :val.sync="calc.formY"
                     />
 
                     <MultiInput
                         label="Result"
                         placeholder="0x00"
-                        :calc="calc.formR"
+                        :val.sync="calc.formR"
                         :disabled=true
                     />
 
@@ -91,43 +91,6 @@ export default {
 
         calculate(e) {
             console.log(e,'calc');
-        },
-
-        toDec(num){
-            console.log('toDec', num);
-        },
-        isDec(num){
-            console.log('isDec', num);
-            return false;
-        },
-
-        toHex(num){
-            console.log('toHex', num);
-        },
-        isHex(num){
-            console.log('isHex', num);
-            let a = parseInt(num,16);
-            return (a.toString(16) === num.toLowerCase())
-        },
-
-        toBin(num){
-            console.log('toBin', num);
-        },
-        isBin(num){
-            console.log('isBin', num);
-            let re = new RegExp('^[0-1]{1,}$');
-            return re.test(num);
-        },
-
-        detectType(e){
-            console.log('detectType', num);
-            let num = e.target.value;
-
-            let isDec = this.isDec(num);
-            let isHex = this.isHex(num);
-            let isBin = this.isBin(num);
-
-            console.log('isDec', isDec, 'isHex', isHex, 'isBin',isBin);
         }
     }
 }
