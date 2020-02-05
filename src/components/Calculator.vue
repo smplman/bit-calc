@@ -40,8 +40,10 @@
                     <MultiInput
                         label="Y"
                         placeholder="0x00"
-                        :val.sync="calc.formY"
+                        :val.sync="calc.formY" 
                     />
+
+                    <Functions/>
 
                     <MultiInput
                         label="Result"
@@ -50,12 +52,6 @@
                         :disabled=true
                     />
 
-                    <v-btn small>&lt;&lt;</v-btn>
-                    <v-btn small>&gt;&gt;</v-btn>
-                    <v-btn small>&amp;</v-btn>
-                    <v-btn small>^</v-btn>
-                    <v-btn small>~</v-btn>
-                    <v-btn small>|</v-btn>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -72,10 +68,12 @@
 
 <script>
 import MultiInput from './MultiInput';
+import Functions from './Functions';
 
 export default {
     components: {
-        MultiInput
+        MultiInput,
+        Functions
     },
     props: {},
     data() {
